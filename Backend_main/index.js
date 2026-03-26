@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const cors = require('cors');
 const app = express();
 const port = 3000;
+
+// 配置CORS
+app.use(cors());
 
 // 静态文件服务，用于文件下载
 app.use('/downloads', express.static(path.join(__dirname, 'downloads')));
