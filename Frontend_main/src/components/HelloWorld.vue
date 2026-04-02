@@ -42,6 +42,9 @@ const fetchList = async () => {
     <button class="counter" @click="fetchList" :disabled="loading">
       {{ loading ? 'Loading...' : 'Get List Data' }}
     </button>
+    
+    <h2>3D Model</h2>
+    <ThreeModel />
   </section>
 
   <section id="list-data" v-if="listData">
