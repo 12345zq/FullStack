@@ -98,6 +98,24 @@ app.get('/getList', (req, res) => {
   });
 });
 
+// /getModelList API
+app.get('/getModelList', (req, res) => {
+  const modelList = [
+    { label: '海狸', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-beaver.glb' },
+    { label: '蜜蜂', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-bee.glb' },
+    { label: '兔子', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-bunny.glb' },
+    { label: '猫', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-cat.glb' },
+    { label: '狗', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-dog.glb' },
+    { label: '熊猫', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-panda.glb' },
+    { label: '老虎', value: '/models/kenney_cube-pets_1.0/Models/GLB format/animal-tiger.glb' }
+  ];
+  
+  res.json({
+    success: true,
+    data: modelList
+  });
+});
+
 // 文件上传接口
 app.post('/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
