@@ -5,7 +5,11 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const http = require('http');
+const WebSocket = require('ws');
 const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 const port = 3000;
 
 // 解析JSON请求体
@@ -346,6 +350,27 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.listen(port, () => {
+// WebSocket 服务
+wss.on('connection', (ws) => {
+  console.log('WebSocket client connected');
+  
+  // 定期发送服务器时间
+  const interval = setInterval(() => {
+    const now = new Date().toISOString();
+    ws.send(JSON.stringify({ time: now }));
+  }, 1000);
+  
+  ws.on('close', () => {
+    console.log('WebSocket client disconnected');
+    clearInterval(interval);
+  });
+  
+  ws.on('error', (error) => {
+    console.error('WebSocket error:', error);
+  });
+});
+
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
+  console.log(`WebSocket server running on ws://localhost:${port}`);
 });

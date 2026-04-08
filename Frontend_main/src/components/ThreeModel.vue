@@ -1,39 +1,16 @@
 <template>
   <div class="three-model-container">
     <div class="toolbar">
-      <select v-model="selectedModel" @change="loadSelectedModel" placeholder="选择模型">
-        <option v-for="model in props.modelList" :key="model.value" :value="model.value">
+      <a-select v-model:value="selectedModel" @change="loadSelectedModel" placeholder="选择模型" style="width: 120px; margin-right: 10px;">
+        <a-select-option v-for="model in props.modelList" :key="model.value" :value="model.value">
           {{ model.label }}
-        </option>
-      </select>
+        </a-select-option>
+      </a-select>
 
       <button @click="resetModel">重置</button>
     </div>
 
-    <!-- 性能信息面板 -->
-    <div class="panel">
-      <h4>性能信息</h4>
 
-      <div class="group">
-        <label>内存使用</label>
-        <div class="info">{{ performanceInfo.memory }}</div>
-      </div>
-
-      <div class="group">
-        <label>导航耗时</label>
-        <div class="info">{{ performanceInfo.navigation }}</div>
-      </div>
-
-      <div class="group">
-        <label>帧率</label>
-        <div class="info">{{ performanceInfo.fps }} FPS</div>
-      </div>
-
-      <div class="group">
-        <label>渲染时间</label>
-        <div class="info">{{ performanceInfo.renderTime }} ms</div>
-      </div>
-    </div>
 
     <div ref="container" class="model-container"></div>
   </div>
