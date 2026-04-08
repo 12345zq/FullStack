@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, reactive } from 'vue'
 import ThreeModel from './ThreeModel.vue'
+import FunctionPlot from './FunctionPlot.vue'
 
 const listData = ref(null)
 const loading = ref(false)
@@ -149,6 +150,9 @@ onUnmounted(() => {
     <div v-else-if="modelError">{{ modelError }}</div>
     <ThreeModel v-else-if="modelList.length > 0" :modelList="modelList" />
     <div v-else>暂无模型数据</div>
+    
+    <h2>2D Function Plot</h2>
+    <FunctionPlot />
     
     <!-- 性能信息面板 -->
     <div class="panel" style="margin-top: 20px;">
